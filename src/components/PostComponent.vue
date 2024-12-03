@@ -1,16 +1,16 @@
 <template>
   <div class="container">
-    <h1 class="header">Latest Posts</h1>
+    <h1 class="header">Posts</h1>
 
     <div class="create-post">
-      <label for="create-post" class="label">Say Something...</label>
       <div class="input-container">
-        <textarea
+        <input
+          type="text"
           id="create-post"
           v-model="text"
-          placeholder="Write something here..."
+          placeholder="Write something amazing..."
           class="input"
-        ></textarea>
+        />
         <button class="button" v-on:click="createPost">Post</button>
       </div>
     </div>
@@ -61,7 +61,6 @@ export default {
     async createPost() {
       await PostService.insertPost(this.text);
       this.posts = await PostService.getPosts();
-      this.text = ""; // Clear the text box after posting
     },
     async deletePost(id) {
       await PostService.deletePost(id);
@@ -77,67 +76,77 @@ export default {
   max-width: 900px;
   margin: 0 auto;
   padding: 20px;
-  background: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: #f3f8ff;
+  border-radius: 12px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
   font-family: 'Roboto', sans-serif;
+  text-align: center;
 }
 
 /* Header */
 .header {
-  text-align: center;
-  font-size: 32px;
+  font-size: 36px;
   color: #2c3e50;
   margin-bottom: 20px;
   font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 /* Create Post Section */
 .create-post {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
-.label {
-  font-size: 18px;
-  color: #34495e;
-  display: block;
-  margin-bottom: 8px;
-}
+
 .input-container {
   display: flex;
-  gap: 10px;
+  justify-content: center;
   align-items: center;
+  flex-direction: column;
+  gap: 15px;
 }
+
 .input {
-  flex: none; /* Prevent stretching */
-  width: 300px; /* Make narrower */
-  height: 100px; /* Make taller */
+  width: 70%; /* Narrower width */
+  height: 50px; /* Taller input box */
   padding: 10px;
-  border: 1px solid #dcdde1;
-  border-radius: 5px;
-  font-size: 16px;
-  resize: none; /* Disable manual resizing */
+  font-size: 18px;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  outline: none;
+  box-shadow: 0 4px 6px rgba(52, 152, 219, 0.2);
+  transition: all 0.3s ease;
 }
+
+.input:focus {
+  border-color: #2ecc71;
+  box-shadow: 0 4px 8px rgba(46, 204, 113, 0.5);
+}
+
 .button {
-  padding: 10px 20px;
-  background-color: #3498db;
-  color: white;
-  font-size: 16px;
+  width: 150px;
+  height: 50px;
+  background: linear-gradient(45deg, #6a11cb, #2575fc);
+  color: #fff;
+  font-size: 18px;
   font-weight: bold;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
 .button:hover {
-  background-color: #2980b9;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(106, 17, 203, 0.3);
 }
 
 /* Divider */
 .divider {
   border: none;
-  height: 1px;
+  height: 2px;
   background: #ecf0f1;
-  margin: 20px 0;
+  margin: 30px 0;
 }
 
 /* Error Message */
@@ -145,45 +154,55 @@ export default {
   border: 1px solid #e74c3c;
   background-color: #f9dcdc;
   color: #c0392b;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 15px;
+  border-radius: 8px;
   font-size: 16px;
   margin-bottom: 20px;
+  text-align: left;
 }
 
 /* Posts Container */
 .posts-container {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
 }
 
 /* Individual Post */
 .post {
-  background-color: #ecf0f1;
-  border-radius: 8px;
-  padding: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
-  cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
 }
+
 .post:hover {
   transform: translateY(-3px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
+
 .post-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
   font-size: 14px;
   color: #7f8c8d;
+  margin-bottom: 10px;
 }
+
 .post-date {
   font-weight: bold;
+  color: #34495e;
 }
+
+.post-index {
+  color: #95a5a6;
+}
+
 .post-text {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: normal;
   color: #2c3e50;
   margin: 0;
