@@ -106,11 +106,18 @@ export default {
 </script>
 
 <style scoped>
+/* Page Background */
+body {
+  background-color: #e8f4fc; /* Light soft blue background */
+  margin: 0; /* Remove margin to ensure background spans the entire page */
+  font-family: "Roboto", sans-serif;
+}
+
 /* Container */
 .container {
   width: 56%; /* Match text box and posts width */
   max-width: 640px;
-  margin: 40px auto; /* Center the container with some margin at the top */
+  margin: auto; /* Center the container on the page */
   padding: 25px;
   background: #ffffff;
   border-radius: 15px;
@@ -257,15 +264,6 @@ export default {
   font-size: 0.75rem;
   color: #7f8c8d;
   margin-top: 20px;
-}
-
-/* Global Background */
-html, body {
-  background-color: #fef9f3; /* Light bone color */
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: "Roboto", sans-serif;
 }
 
 /* Toast Animations */
