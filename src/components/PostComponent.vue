@@ -106,9 +106,9 @@ export default {
 </script>
 
 <style scoped>
-/* Apply light bone color to the body */
+/* Apply a calming pastel blue background */
 body {
-  background-color: #f8f4e3; /* Light bone color */
+  background-color: #e8f4fc; /* Light pastel blue */
   margin: 0;
   font-family: "Roboto", sans-serif;
 }
