@@ -41,7 +41,7 @@
                 })
               }}
             </span>
-            <span class="post-index">Post {{ index + 1 }}</span>
+            <span class="post-index"><b>Post {{ index + 1 }}</b></span>
           </div>
           <p class="post-text">{{ post.text }}</p>
         </div>
@@ -95,9 +95,9 @@ export default {
 
 /* Container */
 .container {
-  max-width: 900px;
+  max-width: 2250px; /* Increased container size */
   margin: 0 auto;
-  padding: 30px;
+  padding: 50px; /* Added extra padding */
   background: #ffffff; /* White background for the container */
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Floating effect */
@@ -224,6 +224,9 @@ export default {
 }
 .post-date {
   font-weight: bold;
+}
+.post-index {
+  font-weight: bold; /* Make "Post 1" text bold */
 }
 .post-text {
   font-size: 1rem; /* Match font size to textarea (16px) */
