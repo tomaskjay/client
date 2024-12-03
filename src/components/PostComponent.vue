@@ -41,8 +41,9 @@
           </div>
           <p class="post-text">{{ post.text }}</p>
         </div>
-        <p class="note">This project was made with Vue, Express, and MongoDB.</p>
       </div>
+
+      <p class="note">This project was made with Vue, Express, and MongoDB.</p>
 
       <div v-if="showToast" :class="`toast ${toastType}`">{{ toastMessage }}</div>
     </div>
@@ -109,6 +110,7 @@ export default {
 </script>
 
 <style scoped>
+/* Background */
 .background {
   background-color: #f3f4f6;
   min-height: 100vh;
@@ -118,8 +120,9 @@ export default {
   padding: 20px;
 }
 
+/* Container */
 .container {
-  width: 70%; /* Adjusted width for 2.5x size */
+  width: 40%; /* Decreased width by 60% */
   padding: 30px;
   background: #ffffff;
   border-radius: 15px;
@@ -127,6 +130,7 @@ export default {
   font-family: "Roboto", sans-serif;
 }
 
+/* Header */
 .header {
   text-align: center;
   font-size: 1.5rem; /* Adjusted font size */
@@ -135,6 +139,7 @@ export default {
   font-weight: bold;
 }
 
+/* Create Post Section */
 .create-post {
   margin-bottom: 20px;
   display: flex;
@@ -197,6 +202,7 @@ export default {
   margin-bottom: 20px;
 }
 
+/* Toast Notification */
 .toast {
   position: fixed;
   bottom: 20px;
@@ -241,37 +247,32 @@ export default {
   }
 }
 
+/* Posts Container */
 .posts-container {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  height: 400px; /* Decreased height by 20% */
   padding: 10px;
-  border: 1px solid #dcdde1;
   border-radius: 10px;
   overflow-y: auto;
+  background-color: #f3f4f6;
 }
 
 .post {
   background-color: #ecf0f1;
   border-radius: 8px;
   padding: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   word-wrap: break-word;
   word-break: break-word;
   text-align: left;
 }
 
-.post-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  font-size: 14px;
-  color: #7f8c8d;
-}
-
+/* Note */
 .note {
   text-align: center;
-  font-size: 0.75rem;
+  font-size: 0.75rem; /* Smaller font size for the note */
+  color: #7f8c8d;
   margin-top: 10px;
 }
 </style>
