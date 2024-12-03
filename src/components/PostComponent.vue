@@ -5,7 +5,6 @@
 
       <div class="create-post">
         <div class="input-container">
-          <!-- Centered Textarea -->
           <textarea
             id="create-post"
             v-model="text"
@@ -38,7 +37,7 @@
                 })
               }}
             </span>
-            <span class="post-index"><b>Post {{ index + 1 }}</b></span>
+            <span class="post-index"><strong>Post {{ index + 1 }}</strong></span>
           </div>
           <p class="post-text">{{ post.text }}</p>
         </div>
@@ -87,32 +86,32 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 80px; /* 4x larger padding */
+  padding: 20px;
 }
 
 /* Container */
 .container {
-  max-width: 3600px; /* 4x larger container width */
+  max-width: 3200px; /* Increased width (3.5x the original size) */
   margin: 0 auto;
-  padding: 200px; /* 4x larger padding */
+  padding: 30px;
   background: #ffffff; /* White background for the container */
-  border-radius: 60px; /* 4x larger border radius */
-  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.2); /* 4x larger shadow */
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Floating effect */
   font-family: "Roboto", sans-serif;
 }
 
 /* Header */
 .header {
   text-align: center;
-  font-size: 1.5rem; /* Keep font size the same (24px) */
+  font-size: 1.5rem; /* Reduced font size to 24px */
   color: #2c3e50;
-  margin-bottom: 80px; /* 4x larger margin */
+  margin-bottom: 20px;
   font-weight: bold;
 }
 
 /* Create Post Section */
 .create-post {
-  margin-bottom: 80px; /* 4x larger margin */
+  margin-bottom: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -122,34 +121,34 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 40px; /* 4x larger gap */
+  gap: 10px;
   width: 100%;
 }
 
-/* Textarea */
+/* Textarea Styles */
 .textarea {
-  width: 80%; /* 4x larger width */
+  width: 60%;
   height: auto;
-  min-height: 480px; /* 4x larger height */
-  padding: 40px; /* 4x larger padding */
-  border: 4px solid #dcdde1; /* 4x larger border thickness */
-  border-radius: 20px; /* 4x larger border radius */
-  font-size: 1rem; /* Keep font size the same (16px) */
-  resize: vertical;
+  min-height: 120px; /* Increased height by 50% */
+  padding: 10px;
+  border: 1px solid #dcdde1;
+  border-radius: 5px;
+  font-size: 1rem; /* Match font size of posts (16px) */
+  resize: vertical; /* Allows vertical resizing by the user */
   line-height: 1.5;
   overflow: auto;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif; /* Match font family of posts */
 }
 
-/* Button */
+/* Button Styles */
 .button {
-  padding: 40px 80px; /* 4x larger padding */
+  padding: 10px 20px;
   background-color: #3498db;
   color: white;
-  font-size: 1rem; /* Keep font size the same (16px) */
+  font-size: 16px;
   font-weight: bold;
   border: none;
-  border-radius: 20px; /* 4x larger border radius */
+  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -160,61 +159,61 @@ export default {
 /* Divider */
 .divider {
   border: none;
-  height: 4px; /* 4x larger height */
+  height: 1px;
   background: #ecf0f1;
-  margin: 80px 0; /* 4x larger margin */
+  margin: 20px 0;
 }
 
 /* Error Message */
 .error {
-  border: 4px solid #e74c3c; /* 4x larger border thickness */
+  border: 1px solid #e74c3c;
   background-color: #f9dcdc;
   color: #c0392b;
-  padding: 40px; /* 4x larger padding */
-  border-radius: 20px; /* 4x larger border radius */
-  font-size: 1rem; /* Keep font size the same (16px) */
-  margin-bottom: 80px; /* 4x larger margin */
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-bottom: 20px;
 }
 
 /* Posts Container */
 .posts-container {
   display: flex;
   flex-direction: column;
-  gap: 60px; /* 4x larger gap */
+  gap: 15px;
 }
 
 /* Individual Post */
 .post {
   background-color: #ecf0f1;
-  border-radius: 32px; /* 4x larger border radius */
-  padding: 60px; /* 4x larger padding */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* 4x larger shadow */
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
-  word-wrap: break-word;
+  word-wrap: break-word; /* Ensures text wraps properly */
   word-break: break-word;
-  text-align: left;
+  text-align: left; /* Align all posts to the left */
 }
 .post:hover {
-  transform: translateY(-12px); /* 4x larger translation */
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15); /* 4x larger shadow */
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 .post-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 40px; /* 4x larger margin */
-  font-size: 1rem; /* Keep font size the same (16px) */
+  margin-bottom: 10px;
+  font-size: 14px;
   color: #7f8c8d;
 }
 .post-date {
   font-weight: bold;
 }
 .post-index {
-  font-weight: bold; /* Keep Post Index bold */
+  font-weight: bold; /* Bold the Post X text */
 }
 .post-text {
-  font-size: 1rem; /* Keep font size the same (16px) */
+  font-size: 1rem; /* Match font size to textarea (16px) */
   font-weight: normal;
   color: #2c3e50;
   margin: 0;
