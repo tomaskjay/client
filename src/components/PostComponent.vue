@@ -16,7 +16,7 @@
         </div>
       </div>
 
-      <div class="posts-container" v-if="posts.length">
+      <div v-if="posts.length" class="posts-container">
         <div
           class="post"
           v-for="(post, index) in posts"
@@ -24,6 +24,7 @@
           v-on:dblclick="deletePost(post._id)"
         >
           <div class="post-header">
+            <span class="post-index">Post {{ index + 1 }}</span>
             <span class="post-date">
               {{
                 new Date(post.createdAt).toLocaleDateString('en-US', {
@@ -33,17 +34,15 @@
                 })
               }}
             </span>
-            <span class="post-index"><strong>Post {{ index + 1 }}</strong></span>
           </div>
           <p class="post-text">{{ post.text }}</p>
         </div>
       </div>
 
-      <div v-if="!posts.length" class="empty-state">No posts yet. Start writing!</div>
+      <div v-else class="empty-state">No posts yet. Start writing!</div>
 
       <p class="note">This project was made with Vue, Express, and MongoDB.</p>
 
-      <!-- Toast Notification -->
       <div v-if="showToast" :class="`toast ${toastType}`">{{ toastMessage }}</div>
     </div>
   </div>
@@ -111,7 +110,7 @@ export default {
 <style scoped>
 /* Background */
 .background {
-  background-color: #f3f4f6; /* Light gray background */
+  background-color: #f3f4f6;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -121,19 +120,19 @@ export default {
 
 /* Container */
 .container {
-  width: 70%; /* Reduced width by 30% */
-  max-width: 700px;
+  width: 70%; /* Decreased width by 30% */
+  max-width: 800px;
   padding: 30px;
-  background: #ffffff; /* White background for the container */
+  background: #ffffff;
   border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Floating effect */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   font-family: "Roboto", sans-serif;
 }
 
 /* Header */
 .header {
   text-align: center;
-  font-size: 1.5rem; /* Font size of 24px */
+  font-size: 1.5rem;
   color: #2c3e50;
   margin-bottom: 20px;
   font-weight: bold;
@@ -147,6 +146,7 @@ export default {
   align-items: center;
   flex-direction: column;
 }
+
 .input-container {
   display: flex;
   flex-direction: column;
@@ -155,10 +155,8 @@ export default {
   width: 100%;
 }
 
-/* Textarea Styles */
 .textarea {
   width: 100%;
-  height: auto;
   min-height: 120px;
   padding: 10px;
   border: 1px solid #dcdde1;
@@ -170,7 +168,6 @@ export default {
   font-family: "Roboto", sans-serif;
 }
 
-/* Button Styles */
 .button {
   padding: 10px 20px;
   background-color: #3498db;
@@ -182,8 +179,20 @@ export default {
   cursor: pointer;
   transition: background-color 0.3s;
 }
+
 .button:hover {
   background-color: #2980b9;
+}
+
+/* Posts Container */
+.posts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px;
+  border-radius: 10px;
+  overflow-y: auto;
+  background-color: #f3f4f6;
 }
 
 /* Empty State */
@@ -194,46 +203,39 @@ export default {
   margin: 20px 0;
 }
 
-/* Note */
-.note {
-  text-align: center;
-  font-size: 0.75rem; /* Smaller font size for the note */
-  color: #7f8c8d;
-  margin-top: 20px;
-}
-
-/* Posts Container */
-.posts-container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  overflow-y: auto; /* Scrolling for overflow */
-}
-
-/* Individual Post */
+/* Post */
 .post {
-  background-color: #f0f4f8; /* Match attached image */
+  background-color: #ecf0f1;
   border-radius: 8px;
   padding: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  word-wrap: break-word;
+  word-break: break-word;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  word-wrap: break-word;
-  word-break: break-word;
-  color: #34495e;
-  font-size: 1rem;
 }
+
+/* Post Header */
 .post-header {
   display: flex;
   justify-content: space-between;
   width: 100%;
   color: #7f8c8d;
-}
-.post-date {
   font-size: 0.9rem;
 }
 .post-index {
   font-weight: bold;
+}
+.post-date {
+  color: #2c3e50;
+  font-size: 0.9rem;
+}
+
+/* Note */
+.note {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #7f8c8d;
+  margin-top: 20px;
 }
 </style>
