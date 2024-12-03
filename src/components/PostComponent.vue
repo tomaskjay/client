@@ -4,13 +4,14 @@
 
     <div class="create-post">
       <div class="input-container">
-        <input
-          type="text"
+        <!-- Updated to use a textarea -->
+        <textarea
           id="create-post"
           v-model="text"
-          placeholder="Write something amazing..."
-          class="input"
-        />
+          placeholder="Write here..."
+          class="textarea"
+          rows="3"
+        ></textarea>
         <button class="button" v-on:click="createPost">Post</button>
       </div>
     </div>
@@ -76,77 +77,73 @@ export default {
   max-width: 900px;
   margin: 0 auto;
   padding: 20px;
-  background: #f3f8ff;
-  border-radius: 12px;
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-  font-family: 'Roboto', sans-serif;
-  text-align: center;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: "Roboto", sans-serif;
 }
 
 /* Header */
 .header {
-  font-size: 36px;
+  text-align: center;
+  font-size: 32px;
   color: #2c3e50;
   margin-bottom: 20px;
   font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 1px;
 }
 
 /* Create Post Section */
 .create-post {
-  margin-bottom: 30px;
-}
-
-.input-container {
+  margin-bottom: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 15px;
+}
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
 }
 
-.input {
-  width: 70%; /* Narrower width */
-  height: 50px; /* Taller input box */
+/* Updated Textarea Styles */
+.textarea {
+  width: 60%;
+  height: auto;
+  min-height: 80px;
   padding: 10px;
-  font-size: 18px;
-  border: 2px solid #3498db;
-  border-radius: 8px;
-  outline: none;
-  box-shadow: 0 4px 6px rgba(52, 152, 219, 0.2);
-  transition: all 0.3s ease;
+  border: 1px solid #dcdde1;
+  border-radius: 5px;
+  font-size: 16px;
+  resize: vertical; /* Allows vertical resizing by the user */
+  line-height: 1.5;
+  overflow: auto;
 }
 
-.input:focus {
-  border-color: #2ecc71;
-  box-shadow: 0 4px 8px rgba(46, 204, 113, 0.5);
-}
-
+/* Button Styles */
 .button {
-  width: 150px;
-  height: 50px;
-  background: linear-gradient(45deg, #6a11cb, #2575fc);
-  color: #fff;
-  font-size: 18px;
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  font-size: 16px;
   font-weight: bold;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: background-color 0.3s;
 }
-
 .button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(106, 17, 203, 0.3);
+  background-color: #2980b9;
 }
 
 /* Divider */
 .divider {
   border: none;
-  height: 2px;
+  height: 1px;
   background: #ecf0f1;
-  margin: 30px 0;
+  margin: 20px 0;
 }
 
 /* Error Message */
@@ -154,55 +151,45 @@ export default {
   border: 1px solid #e74c3c;
   background-color: #f9dcdc;
   color: #c0392b;
-  padding: 15px;
-  border-radius: 8px;
+  padding: 10px;
+  border-radius: 5px;
   font-size: 16px;
   margin-bottom: 20px;
-  text-align: left;
 }
 
 /* Posts Container */
 .posts-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
 }
 
 /* Individual Post */
 .post {
-  background-color: #ffffff;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ecf0f1;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
-  transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
-
 .post:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
-
 .post-header {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 10px;
   font-size: 14px;
   color: #7f8c8d;
-  margin-bottom: 10px;
 }
-
 .post-date {
   font-weight: bold;
-  color: #34495e;
 }
-
-.post-index {
-  color: #95a5a6;
-}
-
 .post-text {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: normal;
   color: #2c3e50;
   margin: 0;
