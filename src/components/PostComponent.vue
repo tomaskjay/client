@@ -4,13 +4,13 @@
 
     <div class="create-post">
       <div class="input-container">
-        <!-- Updated to use a textarea -->
+        <!-- Updated Textarea -->
         <textarea
           id="create-post"
           v-model="text"
           placeholder="Write here..."
           class="textarea"
-          rows="3"
+          rows="5"
         ></textarea>
         <button class="button" v-on:click="createPost">Post</button>
       </div>
@@ -28,10 +28,16 @@
         v-on:dblclick="deletePost(post._id)"
       >
         <div class="post-header">
-          <span class="post-date">{{
-            `${post.createdAt.getDate()}/${post.createdAt.getMonth()}/${post.createdAt.getFullYear()}`
-          }}</span>
-          <span class="post-index">Post #{{ index + 1 }}</span>
+          <span class="post-date">
+            {{
+              new Date(post.createdAt).toLocaleDateString('en-US', {
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric',
+              })
+            }}
+          </span>
+          <span class="post-index">Post {{ index + 1 }}</span>
         </div>
         <p class="post-text">{{ post.text }}</p>
       </div>
@@ -86,7 +92,7 @@ export default {
 /* Header */
 .header {
   text-align: center;
-  font-size: 32px;
+  font-size: 1.5rem; /* Reduced font size to 24px */
   color: #2c3e50;
   margin-bottom: 20px;
   font-weight: bold;
@@ -112,7 +118,7 @@ export default {
 .textarea {
   width: 60%;
   height: auto;
-  min-height: 80px;
+  min-height: 120px; /* Increased height by 50% */
   padding: 10px;
   border: 1px solid #dcdde1;
   border-radius: 5px;
@@ -173,6 +179,8 @@ export default {
   position: relative;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
+  word-wrap: break-word; /* Ensures text wraps properly */
+  word-break: break-word;
 }
 .post:hover {
   transform: translateY(-3px);
@@ -189,7 +197,7 @@ export default {
   font-weight: bold;
 }
 .post-text {
-  font-size: 18px;
+  font-size: 1rem; /* Reduced font size to 16px */
   font-weight: normal;
   color: #2c3e50;
   margin: 0;
