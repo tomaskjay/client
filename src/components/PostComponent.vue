@@ -106,13 +106,6 @@ export default {
 </script>
 
 <style scoped>
-/* Apply a calming pastel blue background */
-body {
-  background-color: #e8f4fc; /* Light pastel blue */
-  margin: 0;
-  font-family: "Roboto", sans-serif;
-}
-
 /* Container */
 .container {
   width: 56%; /* Match text box and posts width */
@@ -264,6 +257,13 @@ body {
   font-size: 0.75rem;
   color: #7f8c8d;
   margin-top: 20px;
+}
+
+/* Global Background */
+body {
+  background-color: #e8f4fc; /* Light pastel blue background */
+  margin: 0;
+  font-family: "Roboto", sans-serif;
 }
 
 /* Toast Animations */
