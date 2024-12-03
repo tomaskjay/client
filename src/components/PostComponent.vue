@@ -106,11 +106,18 @@ export default {
 </script>
 
 <style scoped>
+/* Apply light bone color to the body */
+body {
+  background-color: #f8f4e3; /* Light bone color */
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+
 /* Container */
 .container {
   width: 56%; /* Match text box and posts width */
   max-width: 640px;
-  margin: auto; /* Center the container on the page */
+  margin: 40px auto; /* Center the container with some margin at the top */
   padding: 25px;
   background: #ffffff;
   border-radius: 15px;
