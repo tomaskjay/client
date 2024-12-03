@@ -111,11 +111,11 @@ export default {
 /* Background */
 .background {
   background-color: #f3f4f6;
-  min-height: 100vh;
+  height: 100vh; /* Ensure full height of the viewport */
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  margin: 0; /* Remove any margin to align perfectly */
 }
 
 /* Container */
@@ -213,6 +213,7 @@ export default {
   display: flex;
   flex-direction: column; /* Stack header and content vertically */
   gap: 10px;
+  text-align: left; /* Align content to the left */
 }
 
 /* Post Header */
