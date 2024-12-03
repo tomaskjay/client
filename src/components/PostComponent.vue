@@ -48,9 +48,9 @@
 
       <!-- Dark Mode Toggle -->
       <div class="dark-mode-toggle">
-        <label class="switch">
+        <label>
           <input type="checkbox" v-model="isDarkMode" />
-          <span class="slider"></span>
+          Dark Mode
         </label>
       </div>
     </div>
@@ -158,52 +158,74 @@ export default {
   color: #f0f0f0; /* Header color in dark mode */
 }
 
-/* Dark Mode Toggle */
-.dark-mode-toggle {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
+/* Create Post Section */
+.create-post {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
 }
 
-/* Toggle Switch */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 25px;
+/* Textarea Styles */
+.textarea {
+  width: 85%; /* Wider text box */
+  height: auto;
+  min-height: 120px;
+  padding: 10px;
+  border: 1px solid #dcdde1;
+  border-radius: 5px;
+  font-size: 1rem;
+  resize: vertical;
+  line-height: 1.5;
+  overflow: auto;
+  font-family: "Roboto", sans-serif;
+  transition: background-color 0.3s, color 0.3s;
 }
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+.background.dark .textarea {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+  border: 1px solid #333333;
 }
-.slider {
-  position: absolute;
+
+/* Button Styles */
+.button {
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: 0.4s;
-  border-radius: 25px;
+  transition: background-color 0.3s;
 }
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 19px;
-  width: 19px;
-  left: 3px;
-  bottom: 3px;
-  background-color: white;
-  transition: 0.4s;
-  border-radius: 50%;
+.button:hover {
+  background-color: #2980b9;
 }
-input:checked + .slider {
-  background-color: #3498db; /* Blue for active */
+.background.dark .button {
+  background-color: #005cbf;
 }
-input:checked + .slider:before {
-  transform: translateX(25px);
+.background.dark .button:hover {
+  background-color: #004494;
+}
+
+/* Divider */
+.divider {
+  border: none;
+  height: 1px;
+  background: #ecf0f1;
+  margin: 20px 0;
+}
+.background.dark .divider {
+  background: #333333;
 }
 
 /* Toast Notification */
@@ -226,25 +248,69 @@ input:checked + .slider:before {
   background: #dc3545; /* Red for error */
 }
 
-/* Toast Animation */
-@keyframes fadein {
-  from {
-    opacity: 0;
-    bottom: 10px;
-  }
-  to {
-    opacity: 1;
-    bottom: 20px;
-  }
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 14px;
+  color: #2c3e50;
 }
-@keyframes fadeout {
-  from {
-    opacity: 1;
-    bottom: 20px;
-  }
-  to {
-    opacity: 0;
-    bottom: 10px;
-  }
+.background.dark .dark-mode-toggle {
+  color: #f0f0f0;
+}
+
+/* Posts Container */
+.posts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Individual Post */
+.post {
+  background-color: #ecf0f1;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  word-wrap: break-word;
+  word-break: break-word;
+  text-align: left;
+}
+.background.dark .post {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+}
+.post:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #7f8c8d;
+}
+.background.dark .post-header {
+  color: #cccccc;
+}
+.post-date {
+  font-weight: bold;
+}
+.post-index {
+  font-weight: bold;
+}
+.post-text {
+  font-size: 1rem;
+  font-weight: normal;
+  color: #2c3e50;
+  margin: 0;
+}
+.background.dark .post-text {
+  color: #f0f0f0;
 }
 </style>
