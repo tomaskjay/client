@@ -24,7 +24,6 @@
           v-on:dblclick="deletePost(post._id)"
         >
           <div class="post-header">
-            <span class="post-index">Post {{ index + 1 }}</span>
             <span class="post-date">
               {{
                 new Date(post.createdAt).toLocaleDateString('en-US', {
@@ -34,6 +33,7 @@
                 })
               }}
             </span>
+            <span class="post-index">Post {{ index + 1 }}</span>
           </div>
           <p class="post-text">{{ post.text }}</p>
         </div>
@@ -211,24 +211,33 @@ export default {
   word-wrap: break-word;
   word-break: break-word;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column; /* Stack header and content vertically */
+  gap: 10px;
 }
 
 /* Post Header */
 .post-header {
   display: flex;
   justify-content: space-between;
-  width: 100%;
   color: #7f8c8d;
   font-size: 0.9rem;
 }
+
 .post-index {
   font-weight: bold;
+  text-align: right;
 }
+
 .post-date {
   color: #2c3e50;
-  font-size: 0.9rem;
+  text-align: left;
+}
+
+/* Post Content */
+.post-text {
+  color: #2c3e50;
+  font-size: 1rem;
+  margin: 0;
 }
 
 /* Toast Notification */
@@ -243,10 +252,12 @@ export default {
   font-weight: bold;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
+
 .toast.success {
   background-color: #2ecc71; /* Green for success */
   color: white;
 }
+
 .toast.error {
   background-color: #e74c3c; /* Red for error */
   color: white;
@@ -271,6 +282,7 @@ export default {
     bottom: 20px;
   }
 }
+
 @keyframes fadeout {
   from {
     opacity: 1;
