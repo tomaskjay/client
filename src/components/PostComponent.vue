@@ -1,6 +1,6 @@
 <template>
-  <div :class="['background', { dark: isDarkMode }]">
-    <div :class="['container', { dark: isDarkMode }]">
+  <div class="background">
+    <div class="container">
       <h1 class="header">Posts ✏️</h1>
 
       <div class="create-post">
@@ -44,17 +44,7 @@
       </div>
 
       <!-- Toast Notification -->
-      <transition name="toast">
-        <div v-if="toastMessage" :class="['toast', toastType]">{{ toastMessage }}</div>
-      </transition>
-
-      <!-- Dark Mode Toggle -->
-      <div class="dark-mode-toggle">
-        <label class="switch">
-          <input type="checkbox" v-model="isDarkMode" />
-          <span class="slider"></span>
-        </label>
-      </div>
+      <div v-if="showToast" :class="`toast ${toastType}`">{{ toastMessage }}</div>
     </div>
   </div>
 </template>
@@ -69,9 +59,9 @@ export default {
       posts: [],
       error: "",
       text: "",
-      toastMessage: null,
-      toastType: "",
-      isDarkMode: false, // Dark mode toggle state
+      showToast: false,
+      toastMessage: "",
+      toastType: "success", // 'success' or 'error'
     };
   },
   async created() {
@@ -85,35 +75,33 @@ export default {
     async createPost() {
       if (this.text.trim() === "") {
         this.error = "Post cannot be empty!";
-        this.showToast("Post cannot be empty!", "error");
         return;
       }
       try {
         await PostService.insertPost(this.text);
         this.posts = await PostService.getPosts();
         this.text = ""; // Clear the text box
-        this.error = ""; // Clear any previous error
-        this.showToast("Post submitted successfully!", "success");
+        this.showToastNotification("Post submitted successfully!", "success");
       } catch (err) {
-        this.error = "Failed to submit post. Please try again.";
+        this.error = err.message;
       }
     },
     async deletePost(id) {
       try {
         await PostService.deletePost(id);
         this.posts = await PostService.getPosts();
-        this.showToast("Post deleted successfully!", "error");
+        this.showToastNotification("Post deleted successfully!", "error");
       } catch (err) {
-        this.error = "Failed to delete post. Please try again.";
+        this.error = err.message;
       }
     },
-    showToast(message, type) {
+    showToastNotification(message, type) {
       this.toastMessage = message;
       this.toastType = type;
+      this.showToast = true;
       setTimeout(() => {
-        this.toastMessage = null;
-        this.toastType = "";
-      }, 3000); // Hide the toast after 3 seconds
+        this.showToast = false;
+      }, 3000); // Hide after 3 seconds
     },
   },
 };
@@ -122,32 +110,98 @@ export default {
 <style scoped>
 /* Background */
 .background {
-  background-color: #121212; /* Slightly lighter dark background */
+  background-color: #f3f4f6; /* Light gray background */
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
-  transition: background-color 0.3s;
-}
-.background.dark {
-  background-color: #1c1c1c;
 }
 
 /* Container */
 .container {
-  max-width: 1800px;
+  max-width: 2000px; /* Increased width (2.5x the original size) */
   margin: 0 auto;
   padding: 30px;
-  background: #ffffff;
+  background: #ffffff; /* White background for the container */
   border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Floating effect */
   font-family: "Roboto", sans-serif;
-  transition: background-color 0.3s, color 0.3s;
 }
-.container.dark {
-  background: #243447; /* Navy blue background */
-  color: #f0f0f0;
+
+/* Header */
+.header {
+  text-align: center;
+  font-size: 1.5rem; /* Reduced font size to 24px */
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Create Post Section */
+.create-post {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+/* Textarea Styles */
+.textarea {
+  width: 80%; /* Wider text box to match container */
+  height: auto;
+  min-height: 120px;
+  padding: 10px;
+  border: 1px solid #dcdde1;
+  border-radius: 5px;
+  font-size: 1rem; /* Match font size of posts (16px) */
+  resize: vertical; /* Allows vertical resizing by the user */
+  line-height: 1.5;
+  overflow: auto;
+  font-family: "Roboto", sans-serif; /* Match font family of posts */
+}
+
+/* Button Styles */
+.button {
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.button:hover {
+  background-color: #2980b9;
+}
+
+/* Divider */
+.divider {
+  border: none;
+  height: 1px;
+  background: #ecf0f1;
+  margin: 20px 0;
+}
+
+/* Error Message */
+.error {
+  border: 1px solid #e74c3c;
+  background-color: #f9dcdc;
+  color: #c0392b;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-bottom: 20px;
 }
 
 /* Toast Notification */
@@ -161,74 +215,79 @@ export default {
   font-size: 14px;
   font-weight: bold;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  color: white;
 }
 .toast.success {
-  background: #28a745; /* Green for success */
+  background-color: #2ecc71; /* Green for success */
+  color: white;
 }
 .toast.error {
-  background: #dc3545; /* Red for error */
+  background-color: #e74c3c; /* Red for error */
+  color: white;
 }
 
-/* Toast Animations */
-.toast-enter-active,
-.toast-leave-active {
-  transition: all 0.5s ease;
+/* Toast Animation */
+@keyframes fadein {
+  from {
+    opacity: 0;
+    bottom: 10px;
+  }
+  to {
+    opacity: 1;
+    bottom: 20px;
+  }
 }
-.toast-enter {
-  transform: translateX(100%);
-  opacity: 0;
-}
-.toast-leave-to {
-  transform: translateX(100%);
-  opacity: 0;
+@keyframes fadeout {
+  from {
+    opacity: 1;
+    bottom: 20px;
+  }
+  to {
+    opacity: 0;
+    bottom: 10px;
+  }
 }
 
-/* Dark Mode Toggle */
-.dark-mode-toggle {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
+/* Posts Container */
+.posts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-/* Toggle Switch */
-.switch {
+/* Individual Post */
+.post {
+  background-color: #ecf0f1;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 25px;
-}
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-.slider {
-  position: absolute;
   cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: 0.4s;
-  border-radius: 25px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  word-wrap: break-word; /* Ensures text wraps properly */
+  word-break: break-word;
+  text-align: left; /* Align all posts to the left */
 }
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 19px;
-  width: 19px;
-  left: 3px;
-  bottom: 3px;
-  background-color: white;
-  transition: 0.4s;
-  border-radius: 50%;
+.post:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
-input:checked + .slider {
-  background-color: #3498db;
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #7f8c8d;
 }
-input:checked + .slider:before {
-  transform: translateX(25px);
+.post-date {
+  font-weight: bold;
+}
+.post-index {
+  font-weight: bold; /* Bold the Post X text */
+}
+.post-text {
+  font-size: 1rem; /* Match font size to textarea (16px) */
+  font-weight: normal;
+  color: #2c3e50;
+  margin: 0;
 }
 </style>
