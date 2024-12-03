@@ -261,3 +261,24 @@ export default {
 
 /* Toast Animations */
 @keyframes fadein {
+  from {
+    opacity: 0;
+    bottom: 10px;
+  }
+  to {
+    opacity: 1;
+    bottom: 20px;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 1;
+    bottom: 20px;
+  }
+  to {
+    opacity: 0;
+    bottom: 10px;
+  }
+}
+</style>
