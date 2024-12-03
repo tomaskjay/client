@@ -111,7 +111,7 @@ export default {
 <style scoped>
 /* Background */
 .background {
-  background-color: #f3f4f6; /* Light gray background */
+  background-color: #33415c; /* Dark blue background */
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -121,8 +121,8 @@ export default {
 
 /* Container */
 .container {
-  max-width: 1600px; /* Set a wider fixed width for the container */
-  width: 90%; /* Responsive width */
+  max-width: 1200px; /* Reduced width by 25% */
+  width: 75%; /* Responsive width */
   padding: 30px;
   background: #ffffff; /* White background for the container */
   border-radius: 15px;
@@ -253,11 +253,12 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  height: 500px; /* Fixed height */
+  height: 375px; /* Reduced height by 25% */
   overflow-y: auto; /* Adds scrolling for overflow */
   border: 1px solid #dcdde1;
   padding: 10px;
   border-radius: 10px;
+  width: 75%; /* Reduced width by 25% */
 }
 
 /* Individual Post */
