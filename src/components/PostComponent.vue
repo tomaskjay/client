@@ -1,7 +1,7 @@
 <template>
   <div class="background">
     <div class="container">
-      <h1 class="header">Blog Posts ✏️</h1>
+      <h1 class="header">Microblog Posts ✏️</h1>
 
       <div class="create-post">
         <div class="input-container">
@@ -111,18 +111,21 @@ export default {
 /* Background */
 .background {
   background-color: #f3f4f6;
-  height: 100vh; /* Ensure full height of the viewport */
+  height: 100vh; /* Ensure it takes up the full viewport height */
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0; /* Remove any margin to align perfectly */
+  margin: 0; /* Remove all margin */
+  padding: 0; /* Remove all padding */
+  overflow: hidden; /* Prevent unnecessary scrolling */
 }
 
 /* Container */
 .container {
-  width: 70%; /* Decreased width by 30% */
-  max-width: 800px;
-  padding: 30px;
+  width: 56%; /* Decrease width by 20% */
+  max-width: 640px;
+  height: auto; /* Adjust height dynamically */
+  padding: 25px; /* Decrease padding for reduced height */
   background: #ffffff;
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
@@ -157,7 +160,7 @@ export default {
 
 .textarea {
   width: 100%;
-  min-height: 120px;
+  min-height: 100px; /* Adjust for reduced height */
   padding: 10px;
   border: 1px solid #dcdde1;
   border-radius: 5px;
