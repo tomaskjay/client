@@ -1,5 +1,5 @@
 <template>
-  <div class="background">
+  <div :class="['background', { dark: isDarkMode }]">
     <div class="container">
       <h1 class="header">Posts ✏️</h1>
 
@@ -45,6 +45,14 @@
 
       <!-- Toast Notification -->
       <div v-if="toastMessage" class="toast">{{ toastMessage }}</div>
+
+      <!-- Dark Mode Toggle -->
+      <div class="dark-mode-toggle">
+        <label>
+          <input type="checkbox" v-model="isDarkMode" />
+          Dark Mode
+        </label>
+      </div>
     </div>
   </div>
 </template>
@@ -60,6 +68,7 @@ export default {
       error: "",
       text: "",
       toastMessage: null,
+      isDarkMode: false, // Dark mode toggle state
     };
   },
   async created() {
@@ -112,17 +121,27 @@ export default {
   justify-content: center;
   align-items: center;
   padding: 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+.background.dark {
+  background-color: #121212; /* Dark mode background */
+  color: #f0f0f0; /* Dark mode text color */
 }
 
 /* Container */
 .container {
-  max-width: 1800px; /* Increased width (2.5x wider) */
+  max-width: 1800px; /* Wider container */
   margin: 0 auto;
   padding: 30px;
-  background: #ffffff; /* White background for the container */
+  background: #ffffff; /* Light mode background */
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Floating effect */
   font-family: "Roboto", sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+.container.dark {
+  background: #1e1e1e; /* Dark mode container background */
+  color: #f0f0f0; /* Dark mode text color */
 }
 
 /* Header */
@@ -132,6 +151,9 @@ export default {
   color: #2c3e50;
   margin-bottom: 20px;
   font-weight: bold;
+}
+.background.dark .header {
+  color: #f0f0f0; /* Header color in dark mode */
 }
 
 /* Create Post Section */
@@ -152,17 +174,23 @@ export default {
 
 /* Textarea Styles */
 .textarea {
-  width: 85%; /* Wider text box to match the wider container */
+  width: 85%; /* Wider text box */
   height: auto;
   min-height: 120px;
   padding: 10px;
   border: 1px solid #dcdde1;
   border-radius: 5px;
   font-size: 1rem; /* Match font size of posts (16px) */
-  resize: vertical; /* Allows vertical resizing by the user */
+  resize: vertical;
   line-height: 1.5;
   overflow: auto;
-  font-family: "Roboto", sans-serif; /* Match font family of posts */
+  font-family: "Roboto", sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+.background.dark .textarea {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+  border: 1px solid #333333;
 }
 
 /* Button Styles */
@@ -180,6 +208,12 @@ export default {
 .button:hover {
   background-color: #2980b9;
 }
+.background.dark .button {
+  background-color: #005cbf;
+}
+.background.dark .button:hover {
+  background-color: #004494;
+}
 
 /* Divider */
 .divider {
@@ -187,6 +221,9 @@ export default {
   height: 1px;
   background: #ecf0f1;
   margin: 20px 0;
+}
+.background.dark .divider {
+  background: #333333;
 }
 
 /* Error Message */
@@ -198,6 +235,11 @@ export default {
   border-radius: 5px;
   font-size: 16px;
   margin-bottom: 20px;
+}
+.background.dark .error {
+  border-color: #ff6b6b;
+  background-color: #442b2b;
+  color: #ff9999;
 }
 
 /* Toast Notification */
@@ -213,6 +255,21 @@ export default {
   font-size: 14px;
   font-weight: bold;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+.background.dark .toast {
+  background: #005cbf;
+}
+
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 14px;
+  color: #2c3e50;
+}
+.background.dark .dark-mode-toggle {
+  color: #f0f0f0;
 }
 
 /* Toast Animation */
@@ -253,9 +310,13 @@ export default {
   position: relative;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
-  word-wrap: break-word; /* Ensures text wraps properly */
+  word-wrap: break-word;
   word-break: break-word;
-  text-align: left; /* Align all posts to the left */
+  text-align: left;
+}
+.background.dark .post {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
 }
 .post:hover {
   transform: translateY(-3px);
@@ -268,16 +329,22 @@ export default {
   font-size: 14px;
   color: #7f8c8d;
 }
+.background.dark .post-header {
+  color: #cccccc;
+}
 .post-date {
   font-weight: bold;
 }
 .post-index {
-  font-weight: bold; /* Bold the Post X text */
+  font-weight: bold;
 }
 .post-text {
-  font-size: 1rem; /* Match font size to textarea (16px) */
+  font-size: 1rem;
   font-weight: normal;
   color: #2c3e50;
   margin: 0;
+}
+.background.dark .post-text {
+  color: #f0f0f0;
 }
 </style>
