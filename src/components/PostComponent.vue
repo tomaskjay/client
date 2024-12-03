@@ -1,45 +1,50 @@
 <template>
-  <div class="container">
-    <h1 class="header">Posts</h1>
+  <div class="background">
+    <div class="container">
+      <h1 class="header">Posts</h1>
 
-    <div class="create-post">
-      <div class="input-container">
-        <!-- Updated Textarea -->
-        <textarea
-          id="create-post"
-          v-model="text"
-          placeholder="Write here..."
-          class="textarea"
-          rows="5"
-        ></textarea>
-        <button class="button" v-on:click="createPost">Post</button>
-      </div>
-    </div>
-
-    <hr class="divider" />
-
-    <p class="error" v-if="error">{{ error }}</p>
-
-    <div class="posts-container">
-      <div
-        class="post"
-        v-for="(post, index) in posts"
-        v-bind:key="post._id"
-        v-on:dblclick="deletePost(post._id)"
-      >
-        <div class="post-header">
-          <span class="post-date">
-            {{
-              new Date(post.createdAt).toLocaleDateString('en-US', {
-                month: 'long',
-                day: 'numeric',
-                year: 'numeric',
-              })
-            }}
-          </span>
-          <span class="post-index">Post {{ index + 1 }}</span>
+      <div class="create-post">
+        <div class="input-container">
+          <div class="textarea-wrapper">
+            <!-- Textarea with Edit Icon -->
+            <textarea
+              id="create-post"
+              v-model="text"
+              placeholder="Write here..."
+              class="textarea"
+              rows="5"
+            ></textarea>
+            <i class="edit-icon">✏️</i>
+          </div>
+          <button class="button" v-on:click="createPost">Post</button>
         </div>
-        <p class="post-text">{{ post.text }}</p>
+      </div>
+
+      <hr class="divider" />
+
+      <p class="error" v-if="error">{{ error }}</p>
+
+      <div class="posts-container">
+        <div
+          class="post"
+          v-for="(post, index) in posts"
+          v-bind:key="post._id"
+          v-on:dblclick="deletePost(post._id)"
+        >
+          <div class="post-header">
+            <span class="post-date">
+              {{
+                new Date(post.createdAt).toLocaleDateString('en-US', {
+                  month: 'long',
+                  day: 'numeric',
+                  year: 'numeric',
+                })
+              }}
+            </span>
+            <span class="post-index">Post {{ index + 1 }}</span>
+          </div>
+          <p class="post-text">{{ post.text }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -78,14 +83,24 @@ export default {
 </script>
 
 <style scoped>
-/* General Container */
+/* Background */
+.background {
+  background-color: #f3f4f6; /* Light gray background */
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Container */
 .container {
   max-width: 900px;
   margin: 0 auto;
-  padding: 20px;
-  background: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  background: #ffffff; /* White background for the container */
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Floating effect */
   font-family: "Roboto", sans-serif;
 }
 
@@ -114,18 +129,31 @@ export default {
   width: 100%;
 }
 
-/* Updated Textarea Styles */
-.textarea {
+/* Textarea Wrapper with Edit Icon */
+.textarea-wrapper {
+  position: relative;
   width: 60%;
+}
+.textarea {
+  width: 100%;
   height: auto;
   min-height: 120px; /* Increased height by 50% */
   padding: 10px;
   border: 1px solid #dcdde1;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 1rem; /* Match font size of posts (16px) */
   resize: vertical; /* Allows vertical resizing by the user */
   line-height: 1.5;
   overflow: auto;
+  font-family: "Roboto", sans-serif; /* Match font family of posts */
+}
+.edit-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.2rem;
+  color: #9b9b9b;
+  cursor: pointer;
 }
 
 /* Button Styles */
@@ -181,6 +209,7 @@ export default {
   transition: transform 0.2s, box-shadow 0.2s;
   word-wrap: break-word; /* Ensures text wraps properly */
   word-break: break-word;
+  text-align: left; /* Align all posts to the left */
 }
 .post:hover {
   transform: translateY(-3px);
@@ -197,7 +226,7 @@ export default {
   font-weight: bold;
 }
 .post-text {
-  font-size: 1rem; /* Reduced font size to 16px */
+  font-size: 1rem; /* Match font size to textarea (16px) */
   font-weight: normal;
   color: #2c3e50;
   margin: 0;
