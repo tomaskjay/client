@@ -1,50 +1,48 @@
 <template>
-  <div class="background">
-    <div class="container">
-      <h1 class="header">Microblog Posts ✏️</h1>
+  <div class="container">
+    <h1 class="header">Microblog Posts ✏️</h1>
 
-      <div class="create-post">
-        <div class="input-container">
-          <textarea
-            id="create-post"
-            v-model="text"
-            placeholder="Write here..."
-            class="textarea"
-            rows="5"
-          ></textarea>
-          <button class="button" v-on:click="createPost">Post</button>
-        </div>
+    <div class="create-post">
+      <div class="input-container">
+        <textarea
+          id="create-post"
+          v-model="text"
+          placeholder="Write here..."
+          class="textarea"
+          rows="5"
+        ></textarea>
+        <button class="button" v-on:click="createPost">Post</button>
       </div>
-
-      <div v-if="posts.length" class="posts-container">
-        <div
-          class="post"
-          v-for="(post, index) in posts"
-          v-bind:key="post._id"
-          v-on:dblclick="deletePost(post._id)"
-        >
-          <div class="post-header">
-            <span class="post-date">
-              {{
-                new Date(post.createdAt).toLocaleDateString('en-US', {
-                  month: 'long',
-                  day: 'numeric',
-                  year: 'numeric',
-                })
-              }}
-            </span>
-            <span class="post-index">Post {{ index + 1 }}</span>
-          </div>
-          <p class="post-text">{{ post.text }}</p>
-        </div>
-      </div>
-
-      <div v-else class="empty-state">No posts yet. Start writing!</div>
-
-      <p class="note">This project was made with Vue, Express, and MongoDB.</p>
-
-      <div v-if="showToast" :class="`toast ${toastType}`">{{ toastMessage }}</div>
     </div>
+
+    <div v-if="posts.length" class="posts-container">
+      <div
+        class="post"
+        v-for="(post, index) in posts"
+        v-bind:key="post._id"
+        v-on:dblclick="deletePost(post._id)"
+      >
+        <div class="post-header">
+          <span class="post-date">
+            {{
+              new Date(post.createdAt).toLocaleDateString('en-US', {
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric',
+              })
+            }}
+          </span>
+          <span class="post-index">Post {{ index + 1 }}</span>
+        </div>
+        <p class="post-text">{{ post.text }}</p>
+      </div>
+    </div>
+
+    <div v-else class="empty-state">No posts yet. Start writing!</div>
+
+    <p class="note">This project was made with Vue, Express, and MongoDB.</p>
+
+    <div v-if="showToast" :class="`toast ${toastType}`">{{ toastMessage }}</div>
   </div>
 </template>
 
@@ -108,23 +106,12 @@ export default {
 </script>
 
 <style scoped>
-/* Background */
-.background {
-  background-color: #f3f4f6;
-  height: 100vh; /* Ensure it takes up the full viewport height */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0; /* Remove all margin */
-  padding: 0; /* Remove all padding */
-}
-
 /* Container */
 .container {
-  width: 56%; /* Decrease width by 20% */
+  width: 56%; /* Match text box and posts width */
   max-width: 640px;
-  height: auto; /* Adjust height dynamically */
-  padding: 25px; /* Decrease padding for reduced height */
+  margin: auto; /* Center the container on the page */
+  padding: 25px;
   background: #ffffff;
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
@@ -158,8 +145,8 @@ export default {
 }
 
 .textarea {
-  width: 100%;
-  min-height: 100px; /* Adjust for reduced height */
+  width: 100%; /* Matches the container width */
+  min-height: 100px;
   padding: 10px;
   border: 1px solid #dcdde1;
   border-radius: 5px;
@@ -191,10 +178,8 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  padding: 10px;
   border-radius: 10px;
   overflow-y: auto;
-  background-color: #f3f4f6;
 }
 
 /* Empty State */
@@ -276,24 +261,3 @@ export default {
 
 /* Toast Animations */
 @keyframes fadein {
-  from {
-    opacity: 0;
-    bottom: 10px;
-  }
-  to {
-    opacity: 1;
-    bottom: 20px;
-  }
-}
-
-@keyframes fadeout {
-  from {
-    opacity: 1;
-    bottom: 20px;
-  }
-  to {
-    opacity: 0;
-    bottom: 10px;
-  }
-}
-</style>
