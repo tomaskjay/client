@@ -108,7 +108,7 @@ export default {
 <style>
 /* Global Styles */
 body {
-  background-color: #e8f4fc; /* Light soft blue background */
+  background-color: #a3c9f1; /* Light soft blue background */
   margin: 0; /* Remove margin to ensure background spans the entire page */
   font-family: "Roboto", sans-serif;
 }
