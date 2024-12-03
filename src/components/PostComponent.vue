@@ -260,9 +260,11 @@ export default {
 }
 
 /* Global Background */
-body {
-  background-color: #e8f4fc; /* Light pastel blue background */
+html, body {
+  background-color: #fef9f3; /* Light bone color */
   margin: 0;
+  padding: 0;
+  height: 100%;
   font-family: "Roboto", sans-serif;
 }
 
