@@ -81,6 +81,7 @@ export default {
         await PostService.insertPost(this.text);
         this.posts = await PostService.getPosts();
         this.text = ""; // Clear the text box
+        this.error = ""; // Clear the error message
         this.showToastNotification("Post submitted successfully!", "success");
       } catch (err) {
         this.error = err.message;
@@ -120,8 +121,8 @@ export default {
 
 /* Container */
 .container {
-  max-width: 2000px; /* Increased width (2.5x the original size) */
-  margin: 0 auto;
+  max-width: 1600px; /* Set a wider fixed width for the container */
+  width: 90%; /* Responsive width */
   padding: 30px;
   background: #ffffff; /* White background for the container */
   border-radius: 15px;
@@ -156,7 +157,7 @@ export default {
 
 /* Textarea Styles */
 .textarea {
-  width: 80%; /* Wider text box to match container */
+  width: 100%; /* Full width within container */
   height: auto;
   min-height: 120px;
   padding: 10px;
@@ -252,6 +253,11 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  height: 500px; /* Fixed height */
+  overflow-y: auto; /* Adds scrolling for overflow */
+  border: 1px solid #dcdde1;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 /* Individual Post */
