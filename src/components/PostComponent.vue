@@ -1,6 +1,6 @@
 <template>
   <div :class="['background', { dark: isDarkMode }]">
-    <div class="container">
+    <div :class="['container', { dark: isDarkMode }]">
       <h1 class="header">Posts ✏️</h1>
 
       <div class="create-post">
@@ -44,13 +44,13 @@
       </div>
 
       <!-- Toast Notification -->
-      <div v-if="toastMessage" class="toast">{{ toastMessage }}</div>
+      <div v-if="toastMessage" :class="['toast', toastType]">{{ toastMessage }}</div>
 
       <!-- Dark Mode Toggle -->
       <div class="dark-mode-toggle">
-        <label>
+        <label class="switch">
           <input type="checkbox" v-model="isDarkMode" />
-          Dark Mode
+          <span class="slider"></span>
         </label>
       </div>
     </div>
@@ -68,6 +68,7 @@ export default {
       error: "",
       text: "",
       toastMessage: null,
+      toastType: "", // Controls toast notification style
       isDarkMode: false, // Dark mode toggle state
     };
   },
@@ -88,7 +89,7 @@ export default {
         await PostService.insertPost(this.text);
         this.posts = await PostService.getPosts();
         this.text = ""; // Clear the text box
-        this.showToast("Post submitted successfully!");
+        this.showToast("Post submitted successfully!", "success");
       } catch (err) {
         this.error = "Failed to submit post. Please try again.";
       }
@@ -97,15 +98,17 @@ export default {
       try {
         await PostService.deletePost(id);
         this.posts = await PostService.getPosts();
-        this.showToast("Post deleted successfully!");
+        this.showToast("Post deleted successfully!", "error");
       } catch (err) {
         this.error = "Failed to delete post. Please try again.";
       }
     },
-    showToast(message) {
+    showToast(message, type) {
       this.toastMessage = message;
+      this.toastType = type;
       setTimeout(() => {
         this.toastMessage = null;
+        this.toastType = "";
       }, 3000); // Hide the toast after 3 seconds
     },
   },
@@ -121,11 +124,10 @@ export default {
   justify-content: center;
   align-items: center;
   padding: 20px;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s;
 }
 .background.dark {
-  background-color: #121212; /* Dark mode background */
-  color: #f0f0f0; /* Dark mode text color */
+  background-color: #000000; /* Dark mode background */
 }
 
 /* Container */
@@ -140,8 +142,8 @@ export default {
   transition: background-color 0.3s, color 0.3s;
 }
 .container.dark {
-  background: #1e1e1e; /* Dark mode container background */
-  color: #f0f0f0; /* Dark mode text color */
+  background: #001f3f; /* Navy blue background */
+  color: #f0f0f0; /* Light font color */
 }
 
 /* Header */
@@ -156,90 +158,52 @@ export default {
   color: #f0f0f0; /* Header color in dark mode */
 }
 
-/* Create Post Section */
-.create-post {
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-.input-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
 }
 
-/* Textarea Styles */
-.textarea {
-  width: 85%; /* Wider text box */
-  height: auto;
-  min-height: 120px;
-  padding: 10px;
-  border: 1px solid #dcdde1;
-  border-radius: 5px;
-  font-size: 1rem; /* Match font size of posts (16px) */
-  resize: vertical;
-  line-height: 1.5;
-  overflow: auto;
-  font-family: "Roboto", sans-serif;
-  transition: background-color 0.3s, color 0.3s;
+/* Toggle Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
 }
-.background.dark .textarea {
-  background-color: #1e1e1e;
-  color: #f0f0f0;
-  border: 1px solid #333333;
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
-
-/* Button Styles */
-.button {
-  padding: 10px 20px;
-  background-color: #3498db;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
+.slider {
+  position: absolute;
   cursor: pointer;
-  transition: background-color 0.3s;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 25px;
 }
-.button:hover {
-  background-color: #2980b9;
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 19px;
+  width: 19px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
 }
-.background.dark .button {
-  background-color: #005cbf;
+input:checked + .slider {
+  background-color: #3498db; /* Blue for active */
 }
-.background.dark .button:hover {
-  background-color: #004494;
-}
-
-/* Divider */
-.divider {
-  border: none;
-  height: 1px;
-  background: #ecf0f1;
-  margin: 20px 0;
-}
-.background.dark .divider {
-  background: #333333;
-}
-
-/* Error Message */
-.error {
-  border: 1px solid #e74c3c;
-  background-color: #f9dcdc;
-  color: #c0392b;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-.background.dark .error {
-  border-color: #ff6b6b;
-  background-color: #442b2b;
-  color: #ff9999;
+input:checked + .slider:before {
+  transform: translateX(25px);
 }
 
 /* Toast Notification */
@@ -247,29 +211,19 @@ export default {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: #3498db;
-  color: white;
   padding: 15px 20px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   font-size: 14px;
   font-weight: bold;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  color: white;
 }
-.background.dark .toast {
-  background: #005cbf;
+.toast.success {
+  background: #28a745; /* Green for success */
 }
-
-/* Dark Mode Toggle */
-.dark-mode-toggle {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  font-size: 14px;
-  color: #2c3e50;
-}
-.background.dark .dark-mode-toggle {
-  color: #f0f0f0;
+.toast.error {
+  background: #dc3545; /* Red for error */
 }
 
 /* Toast Animation */
@@ -292,59 +246,5 @@ export default {
     opacity: 0;
     bottom: 10px;
   }
-}
-
-/* Posts Container */
-.posts-container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-/* Individual Post */
-.post {
-  background-color: #ecf0f1;
-  border-radius: 8px;
-  padding: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: relative;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-  word-wrap: break-word;
-  word-break: break-word;
-  text-align: left;
-}
-.background.dark .post {
-  background-color: #1e1e1e;
-  color: #f0f0f0;
-}
-.post:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-.post-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  font-size: 14px;
-  color: #7f8c8d;
-}
-.background.dark .post-header {
-  color: #cccccc;
-}
-.post-date {
-  font-weight: bold;
-}
-.post-index {
-  font-weight: bold;
-}
-.post-text {
-  font-size: 1rem;
-  font-weight: normal;
-  color: #2c3e50;
-  margin: 0;
-}
-.background.dark .post-text {
-  color: #f0f0f0;
 }
 </style>
