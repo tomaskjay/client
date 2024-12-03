@@ -42,6 +42,11 @@
           <p class="post-text">{{ post.text }}</p>
         </div>
       </div>
+
+      <!-- Toast Notification -->
+      <div v-if="showToast" class="toast">
+        Post submitted successfully!
+      </div>
     </div>
   </div>
 </template>
@@ -56,6 +61,7 @@ export default {
       posts: [],
       error: "",
       text: "",
+      showToast: false,
     };
   },
   async created() {
@@ -67,8 +73,19 @@ export default {
   },
   methods: {
     async createPost() {
-      await PostService.insertPost(this.text);
-      this.posts = await PostService.getPosts();
+      if (this.text.trim() === "") {
+        this.error = "Post cannot be empty!";
+        return;
+      }
+      try {
+        await PostService.insertPost(this.text);
+        this.posts = await PostService.getPosts();
+        this.text = ""; // Clear the text box
+        this.showToast = true; // Show toast notification
+        setTimeout(() => (this.showToast = false), 3000); // Hide after 3 seconds
+      } catch (err) {
+        this.error = err.message;
+      }
     },
     async deletePost(id) {
       await PostService.deletePost(id);
@@ -91,7 +108,7 @@ export default {
 
 /* Container */
 .container {
-  max-width: 3200px; /* Increased width (3.5x the original size) */
+  max-width: 1400px; /* Significantly wider container */
   margin: 0 auto;
   padding: 30px;
   background: #ffffff; /* White background for the container */
@@ -127,9 +144,9 @@ export default {
 
 /* Textarea Styles */
 .textarea {
-  width: 60%;
+  width: 80%; /* Wider text box to match container */
   height: auto;
-  min-height: 120px; /* Increased height by 50% */
+  min-height: 120px;
   padding: 10px;
   border: 1px solid #dcdde1;
   border-radius: 5px;
@@ -173,6 +190,43 @@ export default {
   border-radius: 5px;
   font-size: 16px;
   margin-bottom: 20px;
+}
+
+/* Toast Notification */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #3498db;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+  font-weight: bold;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Toast Animation */
+@keyframes fadein {
+  from {
+    opacity: 0;
+    bottom: 10px;
+  }
+  to {
+    opacity: 1;
+    bottom: 20px;
+  }
+}
+@keyframes fadeout {
+  from {
+    opacity: 1;
+    bottom: 20px;
+  }
+  to {
+    opacity: 0;
+    bottom: 10px;
+  }
 }
 
 /* Posts Container */
