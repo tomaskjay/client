@@ -41,6 +41,7 @@
           </div>
           <p class="post-text">{{ post.text }}</p>
         </div>
+        <p class="note">This project was made with Vue, Express, and MongoDB.</p>
       </div>
 
       <!-- Toast Notification -->
@@ -111,7 +112,7 @@ export default {
 <style scoped>
 /* Background */
 .background {
-  background-color: #33415c; /* Dark blue background */
+  background-color: #f3f4f6; /* Light gray background */
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -121,8 +122,8 @@ export default {
 
 /* Container */
 .container {
-  max-width: 1200px; /* Reduced width by 25% */
-  width: 75%; /* Responsive width */
+  max-width: 1600px;
+  width: 90%; /* Responsive width */
   padding: 30px;
   background: #ffffff; /* White background for the container */
   border-radius: 15px;
@@ -157,17 +158,17 @@ export default {
 
 /* Textarea Styles */
 .textarea {
-  width: 100%; /* Full width within container */
+  width: 100%;
   height: auto;
   min-height: 120px;
   padding: 10px;
   border: 1px solid #dcdde1;
   border-radius: 5px;
-  font-size: 1rem; /* Match font size of posts (16px) */
-  resize: vertical; /* Allows vertical resizing by the user */
+  font-size: 1rem;
+  resize: vertical;
   line-height: 1.5;
   overflow: auto;
-  font-family: "Roboto", sans-serif; /* Match font family of posts */
+  font-family: "Roboto", sans-serif;
 }
 
 /* Button Styles */
@@ -218,11 +219,11 @@ export default {
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 .toast.success {
-  background-color: #2ecc71; /* Green for success */
+  background-color: #2ecc71;
   color: white;
 }
 .toast.error {
-  background-color: #e74c3c; /* Red for error */
+  background-color: #e74c3c;
   color: white;
 }
 
@@ -252,13 +253,22 @@ export default {
 .posts-container {
   display: flex;
   flex-direction: column;
+  align-items: center; /* Center contents */
   gap: 15px;
-  height: 375px; /* Reduced height by 25% */
-  overflow-y: auto; /* Adds scrolling for overflow */
+  height: 200px; /* Reduced height by 60% */
+  width: 400px; /* Reduced width by 60% */
+  overflow-y: auto;
   border: 1px solid #dcdde1;
   padding: 10px;
   border-radius: 10px;
-  width: 75%; /* Reduced width by 25% */
+}
+
+/* Note */
+.note {
+  text-align: center;
+  font-size: 0.75rem; /* Smaller font size for the note */
+  color: #7f8c8d;
+  margin-top: 10px;
 }
 
 /* Individual Post */
@@ -269,32 +279,8 @@ export default {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-  word-wrap: break-word; /* Ensures text wraps properly */
+  word-wrap: break-word;
   word-break: break-word;
-  text-align: left; /* Align all posts to the left */
-}
-.post:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-.post-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  font-size: 14px;
-  color: #7f8c8d;
-}
-.post-date {
-  font-weight: bold;
-}
-.post-index {
-  font-weight: bold; /* Bold the Post X text */
-}
-.post-text {
-  font-size: 1rem; /* Match font size to textarea (16px) */
-  font-weight: normal;
-  color: #2c3e50;
-  margin: 0;
+  text-align: center; /* Center text in posts */
 }
 </style>
