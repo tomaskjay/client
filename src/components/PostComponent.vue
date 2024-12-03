@@ -117,7 +117,6 @@ export default {
   align-items: center;
   margin: 0; /* Remove all margin */
   padding: 0; /* Remove all padding */
-  overflow: hidden; /* Prevent unnecessary scrolling */
 }
 
 /* Container */
