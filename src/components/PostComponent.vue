@@ -44,7 +44,6 @@
         <p class="note">This project was made with Vue, Express, and MongoDB.</p>
       </div>
 
-      <!-- Toast Notification -->
       <div v-if="showToast" :class="`toast ${toastType}`">{{ toastMessage }}</div>
     </div>
   </div>
@@ -110,9 +109,8 @@ export default {
 </script>
 
 <style scoped>
-/* Background */
 .background {
-  background-color: #f3f4f6; /* Light gray background */
+  background-color: #f3f4f6;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -120,27 +118,23 @@ export default {
   padding: 20px;
 }
 
-/* Container */
 .container {
-  max-width: 1600px;
-  width: 90%; /* Responsive width */
+  width: 70%; /* Adjusted width for 2.5x size */
   padding: 30px;
-  background: #ffffff; /* White background for the container */
+  background: #ffffff;
   border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Floating effect */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   font-family: "Roboto", sans-serif;
 }
 
-/* Header */
 .header {
   text-align: center;
-  font-size: 1.5rem; /* Reduced font size to 24px */
+  font-size: 1.5rem; /* Adjusted font size */
   color: #2c3e50;
   margin-bottom: 20px;
   font-weight: bold;
 }
 
-/* Create Post Section */
 .create-post {
   margin-bottom: 20px;
   display: flex;
@@ -148,6 +142,7 @@ export default {
   align-items: center;
   flex-direction: column;
 }
+
 .input-container {
   display: flex;
   flex-direction: column;
@@ -156,10 +151,8 @@ export default {
   width: 100%;
 }
 
-/* Textarea Styles */
 .textarea {
   width: 100%;
-  height: auto;
   min-height: 120px;
   padding: 10px;
   border: 1px solid #dcdde1;
@@ -171,7 +164,6 @@ export default {
   font-family: "Roboto", sans-serif;
 }
 
-/* Button Styles */
 .button {
   padding: 10px 20px;
   background-color: #3498db;
@@ -183,11 +175,11 @@ export default {
   cursor: pointer;
   transition: background-color 0.3s;
 }
+
 .button:hover {
   background-color: #2980b9;
 }
 
-/* Divider */
 .divider {
   border: none;
   height: 1px;
@@ -195,7 +187,6 @@ export default {
   margin: 20px 0;
 }
 
-/* Error Message */
 .error {
   border: 1px solid #e74c3c;
   background-color: #f9dcdc;
@@ -206,7 +197,6 @@ export default {
   margin-bottom: 20px;
 }
 
-/* Toast Notification */
 .toast {
   position: fixed;
   bottom: 20px;
@@ -218,16 +208,17 @@ export default {
   font-weight: bold;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
+
 .toast.success {
   background-color: #2ecc71;
   color: white;
 }
+
 .toast.error {
   background-color: #e74c3c;
   color: white;
 }
 
-/* Toast Animation */
 @keyframes fadein {
   from {
     opacity: 0;
@@ -238,6 +229,7 @@ export default {
     bottom: 20px;
   }
 }
+
 @keyframes fadeout {
   from {
     opacity: 1;
@@ -249,38 +241,37 @@ export default {
   }
 }
 
-/* Posts Container */
 .posts-container {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center contents */
   gap: 15px;
-  height: 200px; /* Reduced height by 60% */
-  width: 400px; /* Reduced width by 60% */
-  overflow-y: auto;
-  border: 1px solid #dcdde1;
   padding: 10px;
+  border: 1px solid #dcdde1;
   border-radius: 10px;
+  overflow-y: auto;
 }
 
-/* Note */
-.note {
-  text-align: center;
-  font-size: 0.75rem; /* Smaller font size for the note */
-  color: #7f8c8d;
-  margin-top: 10px;
-}
-
-/* Individual Post */
 .post {
   background-color: #ecf0f1;
   border-radius: 8px;
   padding: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: relative;
-  cursor: pointer;
   word-wrap: break-word;
   word-break: break-word;
-  text-align: center; /* Center text in posts */
+  text-align: left;
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #7f8c8d;
+}
+
+.note {
+  text-align: center;
+  font-size: 0.75rem;
+  margin-top: 10px;
 }
 </style>
