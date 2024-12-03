@@ -5,13 +5,12 @@
     <div class="create-post">
       <label for="create-post" class="label">Say Something...</label>
       <div class="input-container">
-        <input
-          type="text"
+        <textarea
           id="create-post"
           v-model="text"
           placeholder="Write something here..."
           class="input"
-        />
+        ></textarea>
         <button class="button" v-on:click="createPost">Post</button>
       </div>
     </div>
@@ -62,6 +61,7 @@ export default {
     async createPost() {
       await PostService.insertPost(this.text);
       this.posts = await PostService.getPosts();
+      this.text = ""; // Clear the text box after posting
     },
     async deletePost(id) {
       await PostService.deletePost(id);
@@ -105,13 +105,17 @@ export default {
 .input-container {
   display: flex;
   gap: 10px;
+  align-items: center;
 }
 .input {
-  flex: 1;
+  flex: none; /* Prevent stretching */
+  width: 300px; /* Make narrower */
+  height: 100px; /* Make taller */
   padding: 10px;
   border: 1px solid #dcdde1;
   border-radius: 5px;
   font-size: 16px;
+  resize: none; /* Disable manual resizing */
 }
 .button {
   padding: 10px 20px;
