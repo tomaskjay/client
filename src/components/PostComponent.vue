@@ -231,11 +231,54 @@ export default {
   font-size: 0.9rem;
 }
 
+/* Toast Notification */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+  font-weight: bold;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+.toast.success {
+  background-color: #2ecc71; /* Green for success */
+  color: white;
+}
+.toast.error {
+  background-color: #e74c3c; /* Red for error */
+  color: white;
+}
+
 /* Note */
 .note {
   text-align: center;
   font-size: 0.75rem;
   color: #7f8c8d;
   margin-top: 20px;
+}
+
+/* Toast Animations */
+@keyframes fadein {
+  from {
+    opacity: 0;
+    bottom: 10px;
+  }
+  to {
+    opacity: 1;
+    bottom: 20px;
+  }
+}
+@keyframes fadeout {
+  from {
+    opacity: 1;
+    bottom: 20px;
+  }
+  to {
+    opacity: 0;
+    bottom: 10px;
+  }
 }
 </style>
