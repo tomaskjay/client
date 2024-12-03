@@ -1,21 +1,18 @@
 <template>
   <div class="background">
     <div class="container">
-      <h1 class="header">Posts</h1>
+      <h1 class="header">Posts ✏️</h1>
 
       <div class="create-post">
         <div class="input-container">
-          <div class="textarea-wrapper">
-            <!-- Textarea with Edit Icon -->
-            <textarea
-              id="create-post"
-              v-model="text"
-              placeholder="Write here..."
-              class="textarea"
-              rows="5"
-            ></textarea>
-            <i class="edit-icon">✏️</i>
-          </div>
+          <!-- Centered Textarea -->
+          <textarea
+            id="create-post"
+            v-model="text"
+            placeholder="Write here..."
+            class="textarea"
+            rows="5"
+          ></textarea>
           <button class="button" v-on:click="createPost">Post</button>
         </div>
       </div>
@@ -90,32 +87,32 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 80px; /* 4x larger padding */
 }
 
 /* Container */
 .container {
-  max-width: 2250px; /* Increased container size */
+  max-width: 3600px; /* 4x larger container width */
   margin: 0 auto;
-  padding: 50px; /* Added extra padding */
+  padding: 200px; /* 4x larger padding */
   background: #ffffff; /* White background for the container */
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Floating effect */
+  border-radius: 60px; /* 4x larger border radius */
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.2); /* 4x larger shadow */
   font-family: "Roboto", sans-serif;
 }
 
 /* Header */
 .header {
   text-align: center;
-  font-size: 1.5rem; /* Reduced font size to 24px */
+  font-size: 1.5rem; /* Keep font size the same (24px) */
   color: #2c3e50;
-  margin-bottom: 20px;
+  margin-bottom: 80px; /* 4x larger margin */
   font-weight: bold;
 }
 
 /* Create Post Section */
 .create-post {
-  margin-bottom: 20px;
+  margin-bottom: 80px; /* 4x larger margin */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -125,46 +122,34 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 40px; /* 4x larger gap */
   width: 100%;
 }
 
-/* Textarea Wrapper with Edit Icon */
-.textarea-wrapper {
-  position: relative;
-  width: 60%;
-}
+/* Textarea */
 .textarea {
-  width: 100%;
+  width: 80%; /* 4x larger width */
   height: auto;
-  min-height: 120px; /* Increased height by 50% */
-  padding: 10px;
-  border: 1px solid #dcdde1;
-  border-radius: 5px;
-  font-size: 1rem; /* Match font size of posts (16px) */
-  resize: vertical; /* Allows vertical resizing by the user */
+  min-height: 480px; /* 4x larger height */
+  padding: 40px; /* 4x larger padding */
+  border: 4px solid #dcdde1; /* 4x larger border thickness */
+  border-radius: 20px; /* 4x larger border radius */
+  font-size: 1rem; /* Keep font size the same (16px) */
+  resize: vertical;
   line-height: 1.5;
   overflow: auto;
-  font-family: "Roboto", sans-serif; /* Match font family of posts */
-}
-.edit-icon {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 1.2rem;
-  color: #9b9b9b;
-  cursor: pointer;
+  font-family: "Roboto", sans-serif;
 }
 
-/* Button Styles */
+/* Button */
 .button {
-  padding: 10px 20px;
+  padding: 40px 80px; /* 4x larger padding */
   background-color: #3498db;
   color: white;
-  font-size: 16px;
+  font-size: 1rem; /* Keep font size the same (16px) */
   font-weight: bold;
   border: none;
-  border-radius: 5px;
+  border-radius: 20px; /* 4x larger border radius */
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -175,61 +160,61 @@ export default {
 /* Divider */
 .divider {
   border: none;
-  height: 1px;
+  height: 4px; /* 4x larger height */
   background: #ecf0f1;
-  margin: 20px 0;
+  margin: 80px 0; /* 4x larger margin */
 }
 
 /* Error Message */
 .error {
-  border: 1px solid #e74c3c;
+  border: 4px solid #e74c3c; /* 4x larger border thickness */
   background-color: #f9dcdc;
   color: #c0392b;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 16px;
-  margin-bottom: 20px;
+  padding: 40px; /* 4x larger padding */
+  border-radius: 20px; /* 4x larger border radius */
+  font-size: 1rem; /* Keep font size the same (16px) */
+  margin-bottom: 80px; /* 4x larger margin */
 }
 
 /* Posts Container */
 .posts-container {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 60px; /* 4x larger gap */
 }
 
 /* Individual Post */
 .post {
   background-color: #ecf0f1;
-  border-radius: 8px;
-  padding: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 32px; /* 4x larger border radius */
+  padding: 60px; /* 4x larger padding */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* 4x larger shadow */
   position: relative;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
-  word-wrap: break-word; /* Ensures text wraps properly */
+  word-wrap: break-word;
   word-break: break-word;
-  text-align: left; /* Align all posts to the left */
+  text-align: left;
 }
 .post:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-12px); /* 4x larger translation */
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15); /* 4x larger shadow */
 }
 .post-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
-  font-size: 14px;
+  margin-bottom: 40px; /* 4x larger margin */
+  font-size: 1rem; /* Keep font size the same (16px) */
   color: #7f8c8d;
 }
 .post-date {
   font-weight: bold;
 }
 .post-index {
-  font-weight: bold; /* Make "Post 1" text bold */
+  font-weight: bold; /* Keep Post Index bold */
 }
 .post-text {
-  font-size: 1rem; /* Match font size to textarea (16px) */
+  font-size: 1rem; /* Keep font size the same (16px) */
   font-weight: normal;
   color: #2c3e50;
   margin: 0;
