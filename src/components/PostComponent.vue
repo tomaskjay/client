@@ -44,9 +44,7 @@
       </div>
 
       <!-- Toast Notification -->
-      <div v-if="showToast" class="toast">
-        Post submitted successfully!
-      </div>
+      <div v-if="toastMessage" class="toast">{{ toastMessage }}</div>
     </div>
   </div>
 </template>
@@ -61,7 +59,7 @@ export default {
       posts: [],
       error: "",
       text: "",
-      showToast: false,
+      toastMessage: null,
     };
   },
   async created() {
@@ -81,15 +79,25 @@ export default {
         await PostService.insertPost(this.text);
         this.posts = await PostService.getPosts();
         this.text = ""; // Clear the text box
-        this.showToast = true; // Show toast notification
-        setTimeout(() => (this.showToast = false), 3000); // Hide after 3 seconds
+        this.showToast("Post submitted successfully!");
       } catch (err) {
-        this.error = err.message;
+        this.error = "Failed to submit post. Please try again.";
       }
     },
     async deletePost(id) {
-      await PostService.deletePost(id);
-      this.posts = await PostService.getPosts();
+      try {
+        await PostService.deletePost(id);
+        this.posts = await PostService.getPosts();
+        this.showToast("Post deleted successfully!");
+      } catch (err) {
+        this.error = "Failed to delete post. Please try again.";
+      }
+    },
+    showToast(message) {
+      this.toastMessage = message;
+      setTimeout(() => {
+        this.toastMessage = null;
+      }, 3000); // Hide the toast after 3 seconds
     },
   },
 };
@@ -108,7 +116,7 @@ export default {
 
 /* Container */
 .container {
-  max-width: 1400px; /* Significantly wider container */
+  max-width: 1800px; /* Increased width (2.5x wider) */
   margin: 0 auto;
   padding: 30px;
   background: #ffffff; /* White background for the container */
@@ -144,7 +152,7 @@ export default {
 
 /* Textarea Styles */
 .textarea {
-  width: 80%; /* Wider text box to match container */
+  width: 85%; /* Wider text box to match the wider container */
   height: auto;
   min-height: 120px;
   padding: 10px;
