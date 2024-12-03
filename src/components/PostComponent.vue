@@ -1,44 +1,60 @@
 <template>
   <div class="container">
-    <h1>Latest Posts</h1>
+    <h1 class="header">Latest Posts</h1>
+
     <div class="create-post">
-      <label for="create-post">Say Something...</label>
-      <input type="text" id="create-post" v-model="text" placeholder="Create a post">
-      <button v-on:click="createPost">Post!</button>
+      <label for="create-post" class="label">Say Something...</label>
+      <div class="input-container">
+        <input
+          type="text"
+          id="create-post"
+          v-model="text"
+          placeholder="Write something here..."
+          class="input"
+        />
+        <button class="button" v-on:click="createPost">Post</button>
+      </div>
     </div>
-    <hr>
+
+    <hr class="divider" />
+
     <p class="error" v-if="error">{{ error }}</p>
-    <div class ="posts-container">
-      <div class="post"
+
+    <div class="posts-container">
+      <div
+        class="post"
         v-for="(post, index) in posts"
-        v-bind:item="post"
-        v-bind:index="index"
         v-bind:key="post._id"
         v-on:dblclick="deletePost(post._id)"
       >
-        {{ `${post.createdAt.getDate()}/${post.createdAt.getMonth()}/${post.createdAt.getFullYear()}` }}
-        <p class="text">{{post.text}}</p>
+        <div class="post-header">
+          <span class="post-date">{{
+            `${post.createdAt.getDate()}/${post.createdAt.getMonth()}/${post.createdAt.getFullYear()}`
+          }}</span>
+          <span class="post-index">Post #{{ index + 1 }}</span>
+        </div>
+        <p class="post-text">{{ post.text }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import PostService from '../PostService';
+import PostService from "../PostService";
 
 export default {
-  name: 'PostComponent',
+  name: "PostComponent",
   data() {
     return {
       posts: [],
-      error: '',
-      text: ''
-    }
+      error: "",
+      text: "",
+    };
   },
   async created() {
     try {
       this.posts = await PostService.getPosts();
-    } catch(err){
+    } catch (err) {
       this.error = err.message;
     }
   },
@@ -50,46 +66,122 @@ export default {
     async deletePost(id) {
       await PostService.deletePost(id);
       this.posts = await PostService.getPosts();
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-div.container {
-  max-width: 800px;
+/* General Container */
+.container {
+  max-width: 900px;
   margin: 0 auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: 'Roboto', sans-serif;
 }
 
-p.error {
-  border: 1px solid #ff5b5f;
-  background-color: #ffc5c1;
+/* Header */
+.header {
+  text-align: center;
+  font-size: 32px;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Create Post Section */
+.create-post {
+  margin-bottom: 20px;
+}
+.label {
+  font-size: 18px;
+  color: #34495e;
+  display: block;
+  margin-bottom: 8px;
+}
+.input-container {
+  display: flex;
+  gap: 10px;
+}
+.input {
+  flex: 1;
   padding: 10px;
-  margin-bottom: 15px;
+  border: 1px solid #dcdde1;
+  border-radius: 5px;
+  font-size: 16px;
 }
-
-div.post {
-  position: relative;
-  border: 1px solid #5bd658;
-  background-color: #bcffb8;
-  padding: 10px 10px 30px 10px;
-  margin-bottom: 15px;
-}
-
-div.created-at {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 5px 15px 5px 15px;
-  background-color: darkgreen;
+.button {
+  padding: 10px 20px;
+  background-color: #3498db;
   color: white;
-  font-size: 13px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.button:hover {
+  background-color: #2980b9;
 }
 
-p.text {
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 0;
+/* Divider */
+.divider {
+  border: none;
+  height: 1px;
+  background: #ecf0f1;
+  margin: 20px 0;
+}
+
+/* Error Message */
+.error {
+  border: 1px solid #e74c3c;
+  background-color: #f9dcdc;
+  color: #c0392b;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* Posts Container */
+.posts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Individual Post */
+.post {
+  background-color: #ecf0f1;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.post:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #7f8c8d;
+}
+.post-date {
+  font-weight: bold;
+}
+.post-text {
+  font-size: 18px;
+  font-weight: normal;
+  color: #2c3e50;
+  margin: 0;
 }
 </style>
