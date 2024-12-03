@@ -105,8 +105,8 @@ export default {
 };
 </script>
 
-<style scoped>
-/* Page Background */
+<style>
+/* Global Styles */
 body {
   background-color: #e8f4fc; /* Light soft blue background */
   margin: 0; /* Remove margin to ensure background spans the entire page */
@@ -117,12 +117,11 @@ body {
 .container {
   width: 56%; /* Match text box and posts width */
   max-width: 640px;
-  margin: auto; /* Center the container on the page */
+  margin: 50px auto; /* Center the container on the page */
   padding: 25px;
   background: #ffffff;
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  font-family: "Roboto", sans-serif;
 }
 
 /* Header */
